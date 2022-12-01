@@ -1,11 +1,15 @@
+import { readFileSync } from "node:fs";
+
 function runDay1Logic(input: string): [number, number] {
-  const calorieArray: Array<number> = input.split('\n\n').map(oneElf => oneElf.split('\n').reduce((calorieSum, str) => {
-    return calorieSum + parseInt(str)
-  }, 0));
+  const calorieArray: Array<number> = input.split("\n\n").map(oneElf =>
+    oneElf.split("\n").reduce((calorieSum, str) => {
+      return calorieSum + parseInt(str);
+    }, 0)
+  );
 
-  const sortedCalorieArray = calorieArray.sort((a,b) => b - a);
+  const sortedCalorieArray = calorieArray.sort((a, b) => b - a);
 
-  return [sortedCalorieArray[0], sortedCalorieArray[0]+sortedCalorieArray[1]+sortedCalorieArray[2]];
+  return [sortedCalorieArray[0], sortedCalorieArray[0] + sortedCalorieArray[1] + sortedCalorieArray[2]];
 }
 
 const day1TestData =
@@ -27,7 +31,7 @@ const day1TestData =
 function day1Test() {
   console.log("\nTEST\n");
 
-  const answerKey = [24000,45000];
+  const answerKey = [24000, 45000];
 
   const answer = runDay1Logic(day1TestData);
 
@@ -41,7 +45,7 @@ function day1Test() {
 }
 
 function day1() {
-  const input: string = require('fs').readFileSync('./input01.txt', 'utf8');
+  const input = readFileSync("./input01.txt", "utf8");
 
   console.log("\nACTUAL\n");
 

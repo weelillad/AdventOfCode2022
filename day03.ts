@@ -16,17 +16,14 @@ function runDay3Logic(input: string): [number, number] {
   // Part 1
   for (const rucksack of rucksacks) {
     const halfSize = rucksack.length / 2;
-    const leftCompartment = rucksack.slice(0, halfSize);
-    const rightCompartment = rucksack.slice(halfSize);
     const itemMap: Map<string, boolean> = new Map();
-    for (let i = 0; i < leftCompartment.length; i++) {
-      itemMap.set(leftCompartment.charAt(i), true);
+    for (let i = 0; i < halfSize; i++) {
+      itemMap.set(rucksack.charAt(i), true);
     }
-    for (let j = 0; j < rightCompartment.length; j++) {
-      const char = rightCompartment.charAt(j)
+    for (let j = halfSize; j < rucksack.length; j++) {
+      const char = rucksack.charAt(j);
       if (itemMap.get(char)) {
-        const priority = getItemPriority(char)
-        result[0] += priority;
+        result[0] += getItemPriority(char);
         break;
       }
     }

@@ -92,6 +92,18 @@ function runDay13Logic(input: string): [number, number] {
     }
   });
 
+  const packets = pairs.flatMap(v => [v.left, v.right]);
+  packets.push([[2]], [[6]]);
+
+  // packets.forEach(p => console.log(p));
+
+  packets.sort((a, b) => -isRightOrder({ left: a, right: b }));
+
+  // packets.forEach(p => console.log(p));
+
+  result[1] = (packets.findIndex(v => Array.isArray(v) && v.length === 1 && Array.isArray(v[0]) && v[0].length === 1 && v[0][0] === 2) + 1) *
+    (packets.findIndex(v => Array.isArray(v) && v.length === 1 && Array.isArray(v[0]) && v[0].length === 1 && v[0][0] === 6) + 1);
+
   return result;
 }
 
@@ -123,7 +135,7 @@ const day13TestData =
 function day13Test(): boolean {
   console.log("\nTEST\n");
 
-  const answerKey = [13, 0];
+  const answerKey = [13, 140];
   const answer = runDay13Logic(day13TestData);
   
   const part1TestPass = answer[0] === answerKey[0];
